@@ -1,0 +1,124 @@
+/*body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body { background:#fff; color:#555; font-size:14px; font-family: "MicroSoft YaHei", sans-serif; }
+td,th,caption { font-size:14px; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; font-size:100%; }
+address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}
+a { color:#555; text-decoration:none; }
+a:hover { text-decoration:none; }
+img { border:none; }
+input, textarea, select, button { font:14px Verdana,Helvetica,Arial,sans-serif; }
+table { border-collapse:collapse; }
+.clearfix:after {content: ""; display: block; clear:both;}
+button{  border: none;}
+input:focus{  outline: none;  }
+input{boeder-width:1px;}*/
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+p,
+blockquote,
+th,
+td,
+a {
+  margin: 0;
+  padding: 0;
+  /*box-sizing: border-box;*/
+}
+body { background:#fff; color:#555; font-size:14px; font-family: "MicroSoft YaHei", sans-serif; }
+td,
+th,
+caption {
+  font-size: 14px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+ol,ul,li { list-style:none; }
+i,em{
+  font-style: normal;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+a {
+  color: #555;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+img {
+  border: none;
+}
+table {
+  border-collapse: collapse;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+input:focus {
+  outline: none;
+}
+input {
+  boeder-width: 1px;
+}
+.fl_left{
+    float: left;
+}
+.fr_right{
+    float: right;
+}
+.pl_10 {
+  padding-left: 10px;
+}
+.w_100 {
+  width: 100%;
+}
+.position_relative {
+  position: relative;
+}
+.position_absolute {
+  position: absolute;
+}
