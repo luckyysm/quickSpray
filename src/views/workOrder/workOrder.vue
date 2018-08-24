@@ -1,202 +1,150 @@
 <template>
   <div class="app-container calendar-list-container">
     <filterContainer>
-      <form-item>
-        <el-select v-model="formInline.region" placeholder="完成工期" style="width: 120px">
-          <el-option label="" value="2018-08-19"></el-option>
-          <el-option label="" value="2018-08-20"></el-option>
-        </el-select>
-      </form-item>
-      <!--下单日期-->
-      <form-item name='下单日期:'>
-        <el-date-picker
-          v-model="listQuery.time_start"
-          type="date"
-          value-format="yyyy-MM-dd"
-        >
-        </el-date-picker>
-        -
-        <el-date-picker
-          v-model="listQuery.time_end"
-          type="date"
-          value-format="yyyy-MM-dd"
-        >
-        </el-date-picker>
-      </form-item>
-      <form-item name='客户名称:'>
-        <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" placeholder="请输入客户名称" v-model="listQuery.cpOrderId"></el-input>
-      </form-item>
-      <form-item name='客户手机:'>
-        <el-input @keyup.enter.native="handleFilter" style="width: 200px" class="filter-item" placeholder="请输入客户手机号" v-model="listQuery.phone"></el-input>
-      </form-item>
-      <form-item name="客户来源:">
-        <el-select v-model="formInline.region" placeholder="客户来源">
-          <el-option label="全部" value="shanghai"></el-option>
-          <el-option label="京东旗舰店 " value="beijing"></el-option>
-        </el-select>
-      </form-item>
-      <!--渠道来源-->
-      <form-item name="消费门店:">
-        <el-select v-model="formInline.region" placeholder="消费门店">
-          <el-option label="全部" value="shanghai"></el-option>
-          <el-option label="京东旗舰店 " value="beijing"></el-option>
-        </el-select>
-      </form-item>
-      <form-item>
-        <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter" >搜索</el-button>
-        <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">新增</el-button>
-      </form-item>
+      <!-- 工单信息 -->
+      <!-- 第一行 -->
+      <el-row>
+        <el-col :span = "6">
+          <form-item name='客户名称'>
+            <el-input @keyup.enter.native="handleFilter" style="width: 210px;" class="filter-item" placeholder="请输入客户名称" v-model="listQuery.cpOrderId"></el-input>
+          </form-item>
+        </el-col>
+        <el-col :span = "6">
+          <form-item name='客户手机'>
+            <el-input @keyup.enter.native="handleFilter" style="width: 210px" class="filter-item" placeholder="请输入客户手机号" v-model="listQuery.phone"></el-input>
+          </form-item>
+        </el-col>
+        <el-col :span = "6">
+          <form-item name='客户性别'>
+            <el-input @keyup.enter.native="handleFilter" style="width: 210px" class="filter-item" placeholder="请输入客户性别" v-model="listQuery.sex"></el-input>
+          </form-item>
+        </el-col>
+        <el-col :span = "6">
+          <form-item name="客户来源">
+            <el-select v-model="formInline.region" placeholder="客户来源">
+              <el-option label="全部" value="shanghai"></el-option>
+              <el-option label="京东旗舰店 " value="beijing"></el-option>
+            </el-select>
+          </form-item>
+        </el-col>
+        
+        
+      </el-row>
+      <!--第二行-->
+      <el-row>
+        <el-col :span="6">
+        <form-item name="车牌号码">
+        <el-input @keyup.enter.native="handleFilter" style="width: 210px" class="filter-item" placeholder="请输入客户性别" v-model="listQuery.sex"></el-input>
+        </form-item>
+      </el-col>
+      <el-col :span="6">
+        <form-item name="车型信息">
+        <el-input @keyup.enter.native="handleFilter" style="width: 210px" class="filter-item" placeholder="请输入客户性别" v-model="listQuery.sex"></el-input>
+        </form-item>
+      </el-col>
+      <el-col :span="6">
+        <form-item name="车身颜色">
+        <el-input @keyup.enter.native="handleFilter" style="width: 210px" class="filter-item" placeholder="请输入客户性别" v-model="listQuery.sex"></el-input>
+        </form-item>
+      </el-col>
+      <el-col :span="6">
+        <form-item name="备注">
+        <el-input @keyup.enter.native="handleFilter" style="width: 210px" class="filter-item" placeholder="请输入客户性别" v-model="listQuery.sex"></el-input>
+        </form-item>
+      </el-col>
+      </el-row>
+
+      <!-- 第三行 -->
+      <el-row>
+        <el-col :span="6">
+          <form-item name="到店时间">
+            <el-date-picker
+              v-model="listQuery.time_start"
+              type="date"
+              value-format="yyyy-MM-dd"
+            >
+            </el-date-picker>
+          </form-item>
+        </el-col>
+        <el-col :span="6">
+          <form-item name="交车时间">
+            <el-date-picker
+              v-model="listQuery.time_start"
+              type="date"
+              value-format="yyyy-MM-dd"
+            >
+            </el-date-picker>
+          </form-item>
+        </el-col>
+        <el-col :span="6">
+          <form-item name="消费门店">
+            <el-input @keyup.enter.native="handleFilter" style="width: 210px" class="filter-item" placeholder="" v-model="listQuery.sex"></el-input>
+          </form-item>
+        </el-col>
+      </el-row>
       <!--<el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">搜索</el-button>-->
     </filterContainer>
-    <!--选项卡-->
-    <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-      <el-tab-pane label="全部" name="first"></el-tab-pane>
-      <el-tab-pane label="待确认" name="second"></el-tab-pane>
-      <el-tab-pane label="待到店" name="third"></el-tab-pane>
-      <el-tab-pane label="待维修" name="four"></el-tab-pane>
-      <el-tab-pane label="维修中" name="five"></el-tab-pane>
-      <el-tab-pane label="待质检" name="six"></el-tab-pane>
-      <el-tab-pane label="待交车" name="seven"></el-tab-pane>
-      <el-tab-pane label="已交车" name="eight"></el-tab-pane>
-      <el-tab-pane label="已完成" name="nine"></el-tab-pane>
-      <el-tab-pane label="已取消或关闭" name="ten"></el-tab-pane>
-    </el-tabs>
-    <!--表格-->
-    <el-table :key='tableKey' :data="list" v-loading="listLoading" element-loading-text="给我一点时间" border fit highlight-current-row
-              style="width: 100%">
-      <el-table-column min-width="160px" align="center" label="序号">
-        <template slot-scope="scope">
-          <span>{{scope.row.cpOrderId}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="80px" align="center" label="买家姓名">
-        <template slot-scope="scope">
-          <span>{{scope.row.userName}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="110px" align="center" label="买家手机号">
-        <template slot-scope="scope">
-          <span>{{scope.row.userPhone}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="110px" align="center" label="注册手机号">
-        <template slot-scope="scope">
-          <span>{{scope.row.phone}}</span>
-        </template>
-      </el-table-column>
-      <!-- <el-table-column min-width="160px" align="center" label="买家注册时间">
-        <template slot-scope="scope">
-          <span>{{scope.row.user_created_at}}</span>
-        </template>
-      </el-table-column> -->
-      <el-table-column min-width="80px" align="center" label="商品数量">
-        <template slot-scope="scope">
-          <span>{{scope.row.productCount}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="80px" align="center" label="品牌">
-        <template slot-scope="scope">
-          <span>{{scope.row.modelName}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="80px" align="center" label="容量">
-        <template slot-scope="scope">
-          <span>{{scope.row.rongliang}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="80px" align="center" label="成色">
-        <template slot-scope="scope">
-          <span>{{scope.row.chengse}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="80px" align="center" label="颜色">
-        <template slot-scope="scope">
-          <span>{{scope.row.yanse}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="80px" align="center" label="商品总额">
-        <template slot-scope="scope">
-          <span>{{scope.row.payPrice}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="100px" align="center" label="钱包使用金额">
-        <template slot-scope="scope">
-          <span>{{scope.row.coinValue}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column class-name="status-col" align="center" label="状态" min-width="80px">
-        <template slot-scope="scope">
-          <!-- <el-tag :type="scope.row.status | statusFilter">{{scope.row.status | statusFilter}}</el-tag> -->
-          <span>{{scope.row.status | statusFilter}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="160px" align="center" label="取消概况">
-        <template slot-scope="scope">
-          <span>{{cancelStatus(scope.row.overtime_or_cancel, scope.row.status)}}</span>
-        </template>
-      </el-table-column>
-      <!-- <el-table-column min-width="160px" align="center" label="时间">
-        <template slot-scope="scope">
-          <span>{{scope.row.updated_at }}</span>
-        </template>
-      </el-table-column> -->
-      <el-table-column min-width="160px" align="center" label="下单时间">
-        <template slot-scope="scope">
-          <span>{{scope.row.created_at }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="160px" align="center" label="签收时间">
-        <template slot-scope="scope">
-          <span>{{scope.row.overTime | overTimeFilter}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="操作" min-width="280" class-name="small-padding">
-        <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleUpdate(scope.row.orderId)">查看详情</el-button>
-          <el-button type="warning" v-if="scope.row.status > 0" size="mini" @click="clearOrder(scope.row.orderId)">取消订单</el-button>
-          <el-button type="success" size="mini" @click="handleReport(scope.row.orderId)">导出</el-button>
-          <!-- <el-button v-if="scope.row.status!='published'" size="mini" type="success" @click="handleModifyStatus(scope.row,'published')">发布
-          </el-button>
-          <el-button v-if="scope.row.status!='draft'" size="mini" @click="handleModifyStatus(scope.row,'draft')">草稿
-          </el-button>
-          <el-button v-if="scope.row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'deleted')">删除
-          </el-button> -->
-        </template>
-      </el-table-column>
-    </el-table>
+    <!-- 验证码信息 -->
+    <filterContainer>
+      <div class="codemessage">
+      <div class="left"></div>
+      <div class="right">
+        <el-row class="fontColor">
+          <el-col :span="12">
+            <form-item>
+              <el-input placeholder="请输入消费验证码"></el-input>
+            </form-item>
+            <span class="addButton ownButton pointer">添加</span>
+            <span class="deleteButton ownButton pointer">删除</span>
+            <span class="pointer" style="margin-left:15px">>>查看未消费商品</span>
 
-    <div v-show="!listLoading" class="pagination-container">
-      <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="listQuery.page"
-                     :page-sizes="[10,20,30, 50]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
-      </el-pagination>
+          </el-col>
+          <el-col :span="6" :offset="4" class="elColor">
+            <span>喷漆：0.00</span>
+            <span>钣金：0.00</span>
+            <span>取送车：0.00</span>
+          </el-col>
+        </el-row>
+         <!--表格-->
+        <el-table>
+          <el-table-column min-width="160px" align="center" label="消费验证码">
+            <template slot-scope="scope">
+              <span>{{scope.row.cpOrderId}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column min-width="80px" align="center" label="商品名称">
+            <template slot-scope="scope">
+              <span>{{scope.row.userName}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column min-width="110px" align="center" label="商品价格">
+            <template slot-scope="scope">
+              <span>{{scope.row.userPhone}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column min-width="110px" align="center" label="服务类型">
+            <template slot-scope="scope">
+              <span>{{scope.row.phone}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column min-width="80px" align="center" label="销售单号">
+            <template slot-scope="scope">
+              <span>{{scope.row.productCount}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column min-width="80px" align="center" label="消费状态">
+            <template slot-scope="scope">
+              <span>{{scope.row.modelName}}</span>
+            </template>
+          </el-table-column>
+        
+        </el-table>
+        
+      </div>
     </div>
 
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="70px" style='width: 400px; margin-left:50px;'>
-        <el-form-item label="类型" prop="type">
-          <el-select class="filter-item" v-model="temp.type" placeholder="请选择">
-            <el-option v-for="item in  calendarTypeOptions" :key="item.key" :label="item.val" :value="item.key">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="时间" prop="timestamp">
-          <el-date-picker v-model="temp.timestamp" type="datetime" placeholder="选择日期时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="标题" prop="title">
-          <el-input v-model="temp.title"></el-input>
-        </el-form-item>
-        <el-form-item label="点评">
-          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="temp.remark">
-          </el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button v-if="dialogStatus=='create'" type="primary" @click="createData">确 定</el-button>
-        <el-button v-else type="primary" @click="updateData">确 定</el-button>
-      </div>
-    </el-dialog>
+    </filterContainer>
+
 
   </div>
 </template>
@@ -206,10 +154,11 @@
 
   export default {
     mixins: [global],
-    name: 'sellerIndex',
-    directives: {
-      waves
-    },
+    // name: 'sellerIndex',
+    name: 'workOrder',
+    // directives: {
+    //   waves
+    // },
     data() {
       return {
         formInline: {
@@ -264,7 +213,8 @@
           sellerPhone: undefined,
           status: undefined,
           imei: '',
-          sort: '+id'
+          sort: '+id',
+          sex: ''
         },
         sortOptions: [{ label: '按ID升序列', key: '+id' }, { label: '按ID降序', key: '-id' }],
         showAuditor: false,
@@ -509,9 +459,34 @@
     }
   }
 </script>
-<style>
+<style scoped>
   .demo-form-inline{
     margin-top: 30px;
   }
+  .container-wrapper{
+    padding-left: 100px!important;
+    line-height: 55px!important;
+    margin-bottom: 10px!important;
+  }
+  .fontColor{
+    color: #0056FF;
+    font-size: 12px;
+    
+  }
+  .elColor{
+    color: #328CFD;
+  }
+  .ownButton{
+    display: inline-block;
+    width: 65px;
+    line-height: 30px;
+    background-color: #E0EAFF;
+    border-radius: 3px;
+  }
+  .pointer{
+    cursor: pointer;
+  }
+
+
 </style>
 
